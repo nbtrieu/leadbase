@@ -1,0 +1,19 @@
+type Organization @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  mailingAddress: String
+  Affiliated: [Person] @hasMany(indexName: "byOrganization", fields: ["id"])
+}
+
+type Person @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  email: String
+  phone: String
+  title: String
+  mailingAddress: String
+  interestAreas: String
+  leadSource: String
+  eventName: String
+  organizationID: ID! @index(name: "byOrganization")
+}
